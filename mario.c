@@ -1,36 +1,46 @@
+#include <cs50.h>
 #include <stdio.h>
-#include <cs50.h>c
+
+int get_height(string prompt);
 
 int main(void)
-
 {
-	// Declare height variable.
-	int height = 0;
-	
-	// Gets height from user, makes sure it is within the required range.
-	do {
-		printf("Height:");
-		height = GetInt();
-        if (height == 0)
+    int height = get_height("Height: ");
+    
+        for (int i = 0; i < height + 1; i++)
         {
-            return 0;
+            for (int period = height; period > i; period--)
+            {
+                if (i == 0)
+                {
+                    printf("");
+                }
+                else
+                {
+                   printf(" "); 
+                }
+            }    
+            for (int hashes = 0; hashes < i; hashes++)
+                {
+                    printf("#");
+                }
+            printf("\n");
         }
-	} while (height < 1 || height > 23);
+}
+    
 
-    // These loops handle the number of rows, spaces and hash markings.
-	for(int row = 0; row < height; row++) 
-	{
-	    // Prints the spaces.
-        for(int space = 0; space < height-row-1; space++)
-        {
-            printf("%s", " ");
-        }
-        // Prints the hash marks.
-		for(int hash = 0; hash < row+2; hash++)
-		{
-			printf("#");
-		}
-		printf("\n");
-	}	
-	return 0;
+int get_height(string prompt)
+{
+    int n;
+    do 
+    {
+        n = get_int("%s", prompt);       
+    }
+    while (n < 1);
+    do
+    {
+        n = get_int("%s", prompt);
+    }
+    while (n > 8);
+    return n;
 }
